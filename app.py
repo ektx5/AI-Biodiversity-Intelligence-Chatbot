@@ -9,8 +9,9 @@ load_dotenv()
 st.set_page_config(page_title='AI Biodiversity Intelligence', layout='wide')
 st.title('Darukaa.Earth: AI Environmental Scientist')
 
-if 'GEMINI_API_KEY' not in os.environ:
-    st.warning('Please set GEMINI_API_KEY in your environment or .env file')
+if not os.getenv('GEMINI_API_KEY'):
+    st.error('GEMINI_API_KEY is missing. Add it to a .env file in the project root and restart Streamlit.')
+    st.stop()
 
 if 'messages' not in st.session_state:
     st.session_state.messages = []
