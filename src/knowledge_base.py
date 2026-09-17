@@ -1,9 +1,9 @@
 from pathlib import Path
 
 from langchain_community.document_loaders import DirectoryLoader, TextLoader
-from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain_community.vectorstores import FAISS
+from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 DB_FAISS_PATH = PROJECT_ROOT / 'vectorstore' / 'db_faiss'
