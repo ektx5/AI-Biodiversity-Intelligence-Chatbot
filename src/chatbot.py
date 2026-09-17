@@ -1,12 +1,12 @@
 from langchain_google_genai import ChatGoogleGenerativeAI
-from langchain.schema import HumanMessage, SystemMessage, AIMessage
+from langchain_core.messages import AIMessage, HumanMessage, SystemMessage
 from src.rag_pipeline import RAGPipeline
 
 class EnvironmentScientistBot:
     def __init__(self):
         self.llm = ChatGoogleGenerativeAI(model='gemini-2.5-pro', temperature=0.2)
         self.rag = RAGPipeline()
-    self.system_prompt = """You are an expert AI environmental scientist.
+    system_prompt = """You are an expert AI environmental scientist.
 Your goal is to provide non-obvious, actionable recommendations to improve biodiversity based on user inputs.
 Constraints:
 1. If fewer than three environmental variables are available, ask concise clarifying questions before recommending an intervention. Prioritize soil health (pH, organic carbon, or moisture), water or rainfall, land use, biodiversity, climate, and human impact.
