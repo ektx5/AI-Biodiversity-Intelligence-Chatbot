@@ -30,13 +30,25 @@ with st.sidebar:
     st.write('You can provide variables in JSON format.')
     json_input = st.text_area('JSON Input', value='{\n  "Soil organic carbon": "0.3%",\n  "Rainfall": "low",\n  "Crop": "monoculture wheat"\n}')
     if st.button('Submit JSON'):
-        st.session_state.messages.append({'role': 'user', 'content': f'Variables provided via JSON:\n{json_input}'})
-        with st.chat_message('user'):
-            st.markdown(f'Variables provided via JSON:\n`json\n{json_input}\n`')
-        with st.chat_message('assistant'):
-            response = bot.generate_response(f'Variables provided via JSON:\n{json_input}', st.session_state.messages[:-1])
-            st.markdown(response)
-        st.session_state.messages.append({'role': 'assistant', 'content': response})
+        try:
+            variables = json.loads(json_input)
+        except json.JSONDecodeError as error:
+            st.error(f'Invalid JSON: {error.msg}')
+            variables = None
+
+        if not isinstance(variables, dict):
+            if variables is not None:
+                st.error('Structured input must be a JSON object of environmental variables.')
+        else:
+            normalized_json = json.dumps(variables, indent=2)
+            user_message = f'Variables provided via JSON:\n{normalized_json}'
+            st.session_state.messages.append({'role': 'user', 'content': user_message})
+            with st.chat_message('user'):
+                st.markdown(f'Variables provided via JSON:\n```json\n{normalized_json}\n```')
+            with st.chat_message('assistant'):
+                response = bot.generate_response(user_message, st.session_state.messages[:-1])
+                st.markdown(response)
+            st.session_state.messages.append({'role': 'assistant', 'content': response})
 
 if prompt := st.chat_input('Describe the environmental situation on your land...'):
     st.session_state.messages.append({'role': 'user', 'content': prompt})
