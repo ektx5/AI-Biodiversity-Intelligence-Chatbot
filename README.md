@@ -66,11 +66,4 @@ FAISS stores dense vectors for document chunks and retains the original text and
 
 ### Gemini API quota limitation
 
-The free Gemini API tier may not be sufficient for this application. Requests can consume the available quota or trigger rate limits before the model returns a result, especially with larger conversation histories and repeated tests. If responses fail with quota or rate-limit errors, wait for the quota window to reset or use a billing-enabled API project with an appropriate limit. Never commit `.env` or expose your API key.
-
-## CI/CD Details
-
-For deployment to Streamlit Community Cloud or Render:
-- Use `app.py` as the application entry point.
-- Add `GEMINI_API_KEY` through the platform's secret-management settings.
-- A CI workflow can run pytest and `flake8` when tests are added.
+The free Gemini API tier may not be sufficient for this application. Requests can consume the available quota or trigger rate limits before the model returns a result, especially with larger conversation histories and repeated tests.
