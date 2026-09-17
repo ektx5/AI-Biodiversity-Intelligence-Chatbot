@@ -41,7 +41,9 @@ We use **FAISS** as a local vector database.
 2. Create a virtual environment and install dependencies:
    `ash
    python -m venv venv
-   source venv/bin/activate  # On Windows use: venv\Scripts\activate
+   source venv/bin/activate  
+   # On Windows use: 
+   venv\Scripts\activate
    pip install -r requirements.txt
    `
 
