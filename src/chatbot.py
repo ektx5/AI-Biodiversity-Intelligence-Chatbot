@@ -4,7 +4,7 @@ from src.rag_pipeline import RAGPipeline
 
 class EnvironmentScientistBot:
     def __init__(self):
-        self.llm = ChatGoogleGenerativeAI(model='gemini-2.5-pro', temperature=0.2)
+        self.llm = ChatGoogleGenerativeAI(model='gemini-3.1-pro-preview', temperature=0.2)
         self.rag = RAGPipeline()
     system_prompt = """You are an expert AI environmental scientist.
 Your goal is to provide non-obvious, actionable recommendations to improve biodiversity based on user inputs.
